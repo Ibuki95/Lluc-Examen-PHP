@@ -5,7 +5,7 @@ namespace Core;
 use Core\Middleware\Authenticated;
 use Core\Middleware\Guest;
 use Core\Middleware\Middleware;
-use NotesController;
+use Http\controllers\NotesController;
 
 class Router
 {
@@ -61,8 +61,9 @@ class Router
             if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
                 Middleware::resolve($route['middleware']);
 
-                if((new $route['controller']) ?? false) {
-                    $this->handleClass((new $route['controller']), $uri, $method);
+                if($route['controller'] === 'NotesCotroller') {
+                    $this->handleClass($uri, $method);
+                    return;
                 }
 
                 return require base_path('Http/controllers/' . $route['controller']);
@@ -86,10 +87,13 @@ class Router
         die();
     }
 
-    public function handleClass($class, $uri, $method){
-        switch ($method) {
-            case 'GET':
-                return $class->create();
+    public function handleClass($uri, $method){
+        $instance = new NotesController();
+
+        if($method === 'GET'){
+            if ($uri == "/notes"){
+                return $instance->index();
+            }
         }
     }
 }

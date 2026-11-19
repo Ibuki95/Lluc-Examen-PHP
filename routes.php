@@ -4,15 +4,15 @@ $router->get('/', 'index.php');
 $router->get('/about', 'about.php');
 $router->get('/contact', 'contact.php');
 
-$router->get('/notes', 'NotesController')->only('auth');
-$router->get('/note', 'notes/show.php');
-$router->delete('/note', 'notes/destroy.php');
+$router->get('/notes', 'NotesController.php')->only('auth');
+$router->get('/note', 'NotesController.php');
+$router->delete('/note', 'NotesController.php');
 
-$router->get('/note/edit', 'notes/edit.php');
-$router->patch('/note', 'notes/update.php');
+$router->get('/note/edit', 'NotesController.php');
+$router->patch('/note', 'NotesController.php');
 
-$router->get('/notes/create', 'notes/create.php');
-$router->post('/notes', 'notes/store.php');
+$router->get('/notes/create', 'NotesController.php');
+$router->post('/notes', 'NotesController.php');
 
 $router->get('/register', 'registration/create.php')->only('guest');
 $router->post('/register', 'registration/store.php')->only('guest');
