@@ -93,17 +93,13 @@ class Router
         if($method === 'GET'){
             if ($uri == "/notes"){
                 $instance->index();
-                return;
             } elseif ($uri == "/note"){
                 $instance->show();
-                return;
             } elseif ($uri == "/notes/create"){
                 $instance->create();
-                return;
             }
 
             $instance->edit();
-            return;
         }
 
         if($method === 'POST'){
