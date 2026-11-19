@@ -4,10 +4,10 @@ namespace Core;
 
 use PDO;
 
-class DatabaseDAOImpl
+class DatabaseDAOImpl implements DatabaseDAO
 {
-    public $connection;
-    public $statement;
+    private $connection;
+    private $statement;
 
     public function __construct($config, $username = 'admin', $password = 'secret')
     {
