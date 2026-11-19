@@ -8,36 +8,6 @@ use Core\Validator;
 
 class NotesController
 {
-    public function manageMethod($uri, $method){
-        if($method === 'GET'){
-            if ($uri == "/notes"){
-                $this->index();
-                return;
-            } elseif ($uri == "/note"){
-                $this->show();
-                return;
-            } elseif ($uri == "/notes/create"){
-                $this->create();
-                return;
-            }
-
-            $this->edit();
-            return;
-        }
-
-        if($method === 'POST'){
-            $this->store();
-        }
-
-        if($method === 'PATCH'){
-            $this->update();
-        }
-
-        if($method === 'DELETE'){
-            $this->destroy();
-        }
-    }
-
     public function create()
     {
         view("notes/create.view.php", [

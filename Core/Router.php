@@ -62,7 +62,7 @@ class Router
                 Middleware::resolve($route['middleware']);
 
                 if($route['controller'] === 'NotesController.php') {
-                    (new NotesController)->manageMethod($uri, $method);
+                    $this->handleNotes($uri, $method);
                     return;
                 }
 
@@ -85,5 +85,37 @@ class Router
         require base_path("views/{$code}.php");
 
         die();
+    }
+
+    public function handleNotes($uri, $method){
+        $instance = new NotesController();
+
+        if($method === 'GET'){
+            if ($uri == "/notes"){
+                $instance->index();
+                return;
+            } elseif ($uri == "/note"){
+                $instance->show();
+                return;
+            } elseif ($uri == "/notes/create"){
+                $instance->create();
+                return;
+            }
+
+            $instance->edit();
+            return;
+        }
+
+        if($method === 'POST'){
+            $instance->store();
+        }
+
+        if($method === 'PATCH'){
+            $instance->update();
+        }
+
+        if($method === 'DELETE'){
+            $instance->destroy();
+        }
     }
 }
