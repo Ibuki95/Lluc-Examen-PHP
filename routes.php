@@ -5,14 +5,14 @@ $router->get('/about', 'about.php');
 $router->get('/contact', 'contact.php');
 
 $router->get('/notes', 'NotesController.php')->only('auth');
-$router->get('/note', 'NotesController.php');
-$router->delete('/note', 'NotesController.php');
+$router->get('/note', 'NotesController.php')->only('auth');
+$router->delete('/note', 'NotesController.php')->only('auth');
 
-$router->get('/note/edit', 'NotesController.php');
-$router->patch('/note', 'NotesController.php');
+$router->get('/note/edit', 'NotesController.php')->only('auth');
+$router->patch('/note', 'NotesController.php')->only('auth');
 
-$router->get('/notes/create', 'NotesController.php');
-$router->post('/notes', 'NotesController.php');
+$router->get('/notes/create', 'NotesController.php')->only('auth');
+$router->post('/notes', 'NotesController.php')->only('auth');
 
 $router->get('/register', 'registration/create.php')->only('guest');
 $router->post('/register', 'registration/store.php')->only('guest');
