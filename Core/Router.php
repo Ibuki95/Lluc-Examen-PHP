@@ -5,6 +5,7 @@ namespace Core;
 use Core\Middleware\Authenticated;
 use Core\Middleware\Guest;
 use Core\Middleware\Middleware;
+use NotesController;
 
 class Router
 {
@@ -60,6 +61,10 @@ class Router
             if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
                 Middleware::resolve($route['middleware']);
 
+                if((new $route['controller']) ?? false) {
+                    $this->handleClass((new $route['controller']), $uri, $method);
+                }
+
                 return require base_path('Http/controllers/' . $route['controller']);
             }
         }
@@ -79,5 +84,12 @@ class Router
         require base_path("views/{$code}.php");
 
         die();
+    }
+
+    public function handleClass($class, $uri, $method){
+        switch ($method) {
+            case 'GET':
+                return $class->create();
+        }
     }
 }
