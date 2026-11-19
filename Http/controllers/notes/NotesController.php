@@ -3,7 +3,7 @@
 namespace Http\controllers\notes;
 
 use Core\App;
-use Core\Database;
+use Core\DatabaseDAOImpl;
 use Core\Validator;
 
 class NotesController
@@ -18,7 +18,7 @@ class NotesController
 
     public function destroy()
     {
-        $db = App::resolve(Database::class);
+        $db = App::resolve(DatabaseDAOImpl::class);
 
         $currentUserId = 1;
 
@@ -38,7 +38,7 @@ class NotesController
 
     public function edit()
     {
-        $db = App::resolve(Database::class);
+        $db = App::resolve(DatabaseDAOImpl::class);
 
         $currentUserId = 1;
 
@@ -57,7 +57,7 @@ class NotesController
 
     public function index()
     {
-        $db = App::resolve(Database::class);
+        $db = App::resolve(DatabaseDAOImpl::class);
         $notes = $db->query('select * from notes where user_id = 1')->get();
 
         view("notes/index.view.php", [
@@ -68,7 +68,7 @@ class NotesController
 
     public function show()
     {
-        $db = App::resolve(Database::class);
+        $db = App::resolve(DatabaseDAOImpl::class);
 
         $currentUserId = 1;
 
@@ -86,7 +86,7 @@ class NotesController
 
     public function store()
     {
-        $db = App::resolve(Database::class);
+        $db = App::resolve(DatabaseDAOImpl::class);
         $errors = [];
 
         if (!Validator::string($_POST['body'], 1, 1000)) {
@@ -111,7 +111,7 @@ class NotesController
 
     public function update()
     {
-        $db = App::resolve(Database::class);
+        $db = App::resolve(DatabaseDAOImpl::class);
 
         $currentUserId = 1;
 

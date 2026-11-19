@@ -2,14 +2,14 @@
 
 use Core\App;
 use Core\Container;
-use Core\Database;
+use Core\DatabaseDAOImpl;
 
 $container = new Container();
 
-$container->bind('Core\Database', function () {
+$container->bind('Core\DatabaseDAOImpl', function () {
     $config = require base_path('config.php');
 
-    return new Database($config['database']);
+    return new DatabaseDAOImpl($config['database']);
 });
 
 App::setContainer($container);

@@ -2,10 +2,10 @@
 
 use Core\App;
 use Core\Authenticator;
-use Core\Database;
+use Core\DatabaseDAOImpl;
 use Core\Validator;
 
-$db = App::resolve(Database::class);
+$db = App::resolve(DatabaseDAOImpl::class);
 
 $email = $_POST['email'];
 $password = $_POST['password'];

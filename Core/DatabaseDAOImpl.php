@@ -4,7 +4,7 @@ namespace Core;
 
 use PDO;
 
-class Database
+class DatabaseDAOImpl
 {
     public $connection;
     public $statement;
